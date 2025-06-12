@@ -35,6 +35,6 @@ def file_proc(cloud_event: CloudEvent)->None:
         #converting to json, publishing to pubsub, returns future object
         msg_json = publisher.publish(topic_path, json.dumps(message).encode("utf-8"))
         #result func returns msg id after publishing
-        print("published message ID", msg_json.result())
+        print("Published message for file ID:", msg_json.result(),json.dumps(message))
     except Exception as e:
         print("error occured while publishing to pubsub:", e)
