@@ -19,13 +19,16 @@ def file_proc(cloud_event: CloudEvent)->None:
     data = cloud_event.data    #storing all data in cloud_event in one var
     file_name = data.get('name', 'not_specified') #also added default values
     file_size = int(data.get('size', 0))
+    #can also get time created
+    time_created = data.get('timeCreated', 'Unknown')
     #getting the file extension for file format
     file_format = file_name.split('.')[-1] if '.' in file_name else 'no_extension'
     # the msg for pubsub
     message = {
         "file": file_name,
         "size": file_size,
-        "format": file_format
+        "format": file_format,
+        "timeCreated": time_created
     }
 
     try:
